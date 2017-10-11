@@ -1,0 +1,26 @@
+{
+  "name": "promisy",
+  "version": "0.0.1",
+  "description": "Promisify a node-callback-style function",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "gulp typescript",
+    "lint": "tslint -c tslint.json ./src/**/*.ts",
+    "test": "mocha ./dist/test/*.js"
+  },
+  "author": "wusiquan",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.34",
+    "chai": "^4.1.2",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.2",
+    "merge2": "^1.2.0",
+    "mocha": "^4.0.1",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.3"
+  }
+}
