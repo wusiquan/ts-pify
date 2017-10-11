@@ -1,5 +1,5 @@
 {
-  "name": "promisy",
+  "name": "ts-pify",
   "version": "0.0.1",
   "description": "Promisify a node-callback-style function",
   "main": "./dist/index.js",
