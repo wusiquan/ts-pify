@@ -14,6 +14,7 @@ gulp.task('typescript', () => {
     tsResult.js.pipe(gulp.dest('./dist')),
     tsResult.dts.pipe(through.obj(function(file, enc, cb) {
       if (!testDirReg.test(file.relative)) {
+        this.push(file)
         cb()
       }
     })).pipe(gulp.dest('./dist'))

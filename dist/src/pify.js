@@ -1,15 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function nodebackForPromise(resolve, reject) {
-    return function (err, value) {
-        if (err) {
-            reject(err);
-        }
-        else {
-            resolve(value);
-        }
-    };
-}
 function pify(fn, opts) {
     opts = Object.assign({
         promiseModule: Promise,
@@ -28,3 +18,13 @@ function pify(fn, opts) {
     return promisiedFn;
 }
 exports.pify = pify;
+function nodebackForPromise(resolve, reject) {
+    return function (err, ...values) {
+        if (err) {
+            reject(err);
+        }
+        else {
+            resolve(values[0]);
+        }
+    };
+}
