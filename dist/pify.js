@@ -3,12 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function pify(fn, opts) {
     opts = Object.assign({
         promiseModule: Promise,
-        context: this
+        context: null,
+        errorFirst: true
     }, opts);
     function promisiedFn(...args) {
         const P = opts.promiseModule;
         let promise = new P((resolve, reject) => {
-            args.push(nodebackForPromise(resolve, reject));
+            if (opts.errorFirst) {
+                args.push(nodebackForPromise(resolve, reject));
+            }
+            else {
+                args.push(resolve);
+            }
         });
         fn.call(opts.context, ...args);
         opts = null;

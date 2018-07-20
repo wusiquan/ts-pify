@@ -1,6 +1,7 @@
 export interface Opts {
   promiseModule?: PromiseConstructor,
-  context?: any
+  context?: any,
+  errorFirst?: boolean
 }
 
 export function pify<TResult>(
@@ -39,14 +40,19 @@ export function pify(fn: Function): Function
 export function pify(fn: Function, opts?: Opts): Function {
   opts = Object.assign({
     promiseModule: Promise,
-    context: this
+    context: null,
+    errorFirst: true
   }, opts)
-
+  
   function promisiedFn(...args: any[]) {
     const P = opts.promiseModule
 
     let promise = new P<any>((resolve, reject) => {
-      args.push(nodebackForPromise(resolve, reject))
+      if (opts.errorFirst) {
+        args.push(nodebackForPromise(resolve, reject))
+      } else {
+        args.push(resolve)
+      }
     })
 
     // try catch?
@@ -54,6 +60,7 @@ export function pify(fn: Function, opts?: Opts): Function {
 
     opts = null
     fn = null
+
     return promise
   }
 

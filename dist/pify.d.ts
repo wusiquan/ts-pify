@@ -1,6 +1,7 @@
 export interface Opts {
     promiseModule?: PromiseConstructor;
     context?: any;
+    errorFirst?: boolean;
 }
 export declare function pify<TResult>(fn: (cb: (err: Error, res: TResult) => void) => void, setting?: Opts): () => Promise<TResult>;
 export declare function pify<T1, TResult>(fn: (arg1: T1, cb: (err: Error, res: TResult) => void) => void, setting?: Opts): (arg1: T1) => Promise<TResult>;
